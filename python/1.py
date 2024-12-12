@@ -1,6 +1,4 @@
-import os
 from input import slurp
-
 
 text = slurp(1)
 rows = text.splitlines()

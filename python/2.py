@@ -1,5 +1,4 @@
-import os
-import input import slurp
+from input import slurp
 
 reports = [[int(x) for x in row.split(' ')] for row in slurp(2).splitlines()]
 
