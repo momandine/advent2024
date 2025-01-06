@@ -27,11 +27,19 @@ class Guard:
         self.map = map
         self.row, self.col = determine_starting_position(map)
         self.rotation_index = 0
-        self.visited = set([self.position_tuple])
+        self.visited = {self.position_tuple}
+
+    @property
+    def cell(self):
+        return (self.row, self.col)
 
     @property
     def position_tuple(self):
-        return (self.row, self.col, self.rotation_index)
+        return (self.cell, self.rotation_index)
+    
+    @property
+    def unique_positions(self):
+        return len({cell for cell, _ in self.visited})
 
     def turn(self):
         self.rotation_index = (self.rotation_index + 1) % DIRECTIONS
@@ -79,7 +87,7 @@ for row, values in enumerate(map):
 
         guard = Guard(map_copy)
         value = guard.explore()
-        print(row, col, value)
+        print(row, col, value, guard.unique_positions)
         cycling_block_counts += value
         
 
